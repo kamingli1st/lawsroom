@@ -11,9 +11,9 @@ Group video chat on your browser. [No Plugin Needed]
     $ cd public
     $ npm install
     $ ./node_modules/.bin/bower install
-    $ ./node_moduels/.bin/gulp js
-    $ ./node_moduels/.bin/gulp css
-    $ ./node_moduels/.bin/gulp browserify
+    $ ./node_modules/.bin/gulp js
+    $ ./node_modules/.bin/gulp css
+    $ ./node_modules/.bin/gulp browserify
     $ cd ../
     ```
 1. Start lawsroom
