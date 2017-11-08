@@ -280,7 +280,7 @@ var en_us_names = [
 'Vergo'
 ];
 
-function id(){
+function makeID(){
     var _;
     if(navigator.language === 'zh-CN'){
       _ = zh_cn_names[getRandomInt(0, zh_cn_names.length-1)];
@@ -289,7 +289,7 @@ function id(){
     }
     return uuid.v4().replace(/-/g, "") + ':' + _;
 }
-function name(id){
+function getName(id){
     var name = id.split(':')[1];
     if(!name || name.length > 16){
         return "一坨屎";

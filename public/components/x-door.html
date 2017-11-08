@@ -33,7 +33,10 @@
             }
         </style>
         <div class="container">
-            <div><paper-input id="input" placeholder="[[lang('enter_a_room')]]"></paper-input></div>
+            <div style="text-align:left;"><paper-input id="input" placeholder="[[lang('enter_a_room')]]">
+                    <div prefix style="color:white;">https://lawsroom.com/room/</div>
+                    <paper-button raised on-click="room" suffix>[[lang('enter_room')]]</paper-button>
+                </paper-input></div>
             <div><br/><br/>OR<br/><br/></div>
             <div><paper-button raised on-click="random">[[lang('random_room')]]</paper-button></div>
         </div>
@@ -58,6 +61,9 @@
                 }
             },
             room: function(){
+                if(this.$.input.value == ""){
+                    this.$.input.value = Date.now();
+                }
                 page('/room/'+this.$.input.value);
             },
             random: function(){
@@ -66,8 +72,12 @@
             lang: function(key){
                 var i18n = {
                     enter_a_room: {
-                        'en-US': 'Type a name, Enter',
-                        'zh-CN': '输入房间名字按回车进入'
+                        'en-US': 'Type a name',
+                        'zh-CN': '输入房间名字'
+                    },
+                    enter_room: {
+                        'en-US': 'Enter',
+                        'zh-CN': '进入房间'
                     },
                     random_room: {
                         'en-US': 'Random',

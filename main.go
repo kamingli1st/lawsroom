@@ -17,7 +17,7 @@ func main() {
 	app.Usage = "Law's room."
 	app.Author = "Cloud"
 	app.Email = "cloud@txthinking.com"
-	app.Version = "0.9.1"
+	app.Version = "0.9.6"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "listen",
@@ -52,7 +52,7 @@ func run(listen string, origins []string) error {
 		AllowedMethods:   []string{"GET", "POST", "DELETE", "PUT"},
 		AllowCredentials: true,
 	}))
-	n.Use(negroni.NewStatic(assetFS()))
+	n.Use(negroni.NewStatic(http.Dir("./public")))
 	n.UseHandler(r)
 
 	s := &http.Server{

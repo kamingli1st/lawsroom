@@ -1,6 +1,21 @@
 <!doctype html>
 <html>
     <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109347256-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-109347256-1');
+            window.addEventListener('location-changed', function() {
+                setTimeout(() => {
+                    console.log(location.pathname);
+                    gtag('config', 'UA-109347256-1', {'page_path': location.pathname});
+                }, 500);
+            });
+        </script>
+
         <title>ROOM</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
@@ -13,7 +28,6 @@
         <link rel="stylesheet" type="text/css" href="/dist/css/layout-grid.min.css" />
         <script src="/dist/js/layout-grid.min.js"></script>
         <script src="/dist/js/superagent.js"></script>
-        <script>window._debug=false;</script>
         <script src="/dist/js/log.js"></script>
         <script src="/dist/js/adapter.js"></script>
         <script src="/dist/js/room.js"></script>

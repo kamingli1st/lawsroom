@@ -1,8 +1,8 @@
-window.logs = [];
-function log(s){
+window.printStack = [];
+function print(s){
     if(!window._debug){
         return;
     }
     console.log(s);
-    logs.push(s);
+    printStack.push(s);
 }

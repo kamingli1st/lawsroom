@@ -58,9 +58,12 @@
                 lt-sm-x-1 lt-sm-y-2 lt-sm-w-1 lt-sm-h-1
                 lt-xs-x-0 lt-xs-y-3 lt-xs-w-1 lt-xs-h-1">
                 <div class="lt-body">
-                    <div style="text-align:center;padding-top:29%;">
+                    <div style="text-align:center;padding-top:20%;">
                     <paper-button id="join" disabled raised on-click="join">[[lang('join')]]</paper-button>
                     <paper-button id="leave" raised on-click="leave">[[lang('leave')]]</paper-button>
+                    <br/>
+                    <br/>
+                    <paper-input label="[[lang('room_address')]]" value$="https://lawsroom.com/room/{{roomId}}" readonly></paper-input>
                     </div>
                 </div>
             </div>
@@ -97,10 +100,10 @@
                 }
             }, 
             ready: function(){
-                this.me = id();
-                this.showData("[NOTICE]: "+this.lang('notice_your_name')+" " + name(this.me));
+                this.me = makeID();
+                this.showData("[NOTICE]: "+this.lang('notice_your_name')+" " + getName(this.me));
                 this.room = new Room({
-                    signalServer: "wss://lawsroom.com/signal/_/",
+                    signalServer: "wss://"+location.hostname+"/signal/_/",
                     me: this.me,
                     iceServers: [{
                         urls: ["stun:stun.lawsroom.com:3478"]
@@ -149,17 +152,17 @@
                 this.showData("[NOTICE]: "+this.lang('notice_disconnect'));
             },
             peer_open: function(who){
-                this.showData("[NOTICE]: " + name(who) + " "+this.lang('notice_joined'));
+                this.showData("[NOTICE]: " + getName(who) + " "+this.lang('notice_joined'));
             },
             peer_close: function(who){
-                this.showData("[NOTICE]: " + name(who) + " "+this.lang('notice_left'));
+                this.showData("[NOTICE]: " + getName(who) + " "+this.lang('notice_left'));
                 this.removeVideo(who);
             },
             channel_open: function(who){
                 this.$.input.disabled = false;
             },
             channel_message: function(who, data){
-                this.showData('[' + name(who) + ']: ' + data);
+                this.showData('[' + getName(who) + ']: ' + data);
             },
             channel_close: function(who){
                 if(this.room.channelsCount() === 0){
@@ -279,7 +282,7 @@
                 this.stream = undefined;
             },
             send: function(){
-                this.showData('[' + name(this.me) +']: ' +this.$.input.value);
+                this.showData('[' + getName(this.me) +']: ' +this.$.input.value);
                 this.room.send(this.$.input.value);
                 this.$.input.value = "";
             },
@@ -295,6 +298,10 @@
             },
             lang: function(key){
                 var i18n = {
+                    room_address: {
+                        'en-US': 'Room address, copy and send to your friends',
+                        'zh-CN': '房间地址, 复制发送给你的朋友们吧'
+                    },
                     join: {
                         'en-US': 'Join',
                         'zh-CN': '加入'

@@ -118,10 +118,10 @@
                 }
             }, 
             ready: function(){
-                this.me = id();
-                this.showData("[NOTICE]: "+this.lang('notice_your_name')+" " + name(this.me));
+                this.me = makeID();
+                this.showData("[NOTICE]: "+this.lang('notice_your_name')+" " + getName(this.me));
                 this.room = new Room({
-                    signalServer: "wss://lawsroom.com/signal/r/",
+                    signalServer: "wss://"+location.hostname+"/signal/r/",
                     me: this.me,
                     iceServers: [{
                         urls: ["stun:stun.lawsroom.com:3478"]
@@ -175,17 +175,17 @@
                 this.showData("[NOTICE]: "+this.lang('notice_disconnect'));
             },
             peer_open: function(who){
-                this.showData("[NOTICE]: " + name(who) + " "+this.lang('notice_joined'));
+                this.showData("[NOTICE]: " + getName(who) + " "+this.lang('notice_joined'));
             },
             peer_close: function(who){
                 this.$.you.stop();
-                this.showData("[NOTICE]: " + name(who) + " "+this.lang('notice_left'));
+                this.showData("[NOTICE]: " + getName(who) + " "+this.lang('notice_left'));
             },
             channel_open: function(who){
                 this.$.input.disabled = false;
             },
             channel_message: function(who, data){
-                this.showData('[' + name(who) + '] : ' + data);
+                this.showData('[' + getName(who) + '] : ' + data);
             },
             channel_close: function(who){
                 if(this.room.channelsCount() === 0){
@@ -289,7 +289,7 @@
                 this.stream = undefined;
             },
             send: function(){
-                this.showData('[' + name(this.me) + ']: ' + this.$.input.value);
+                this.showData('[' + getName(this.me) + ']: ' + this.$.input.value);
                 this.room.send(this.$.input.value);
                 this.$.input.value = "";
             },

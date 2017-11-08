@@ -1,0 +1,1 @@
+function print(n){window._debug&&(console.log(n),printStack.push(n))}window.printStack=[];

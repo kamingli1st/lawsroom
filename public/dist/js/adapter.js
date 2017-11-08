@@ -1,0 +1,1 @@
+var getUserMedia=navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia,RTCSessionDescription=window.RTCSessionDescription||window.mozRTCSessionDescription,RTCPeerConnection=window.RTCPeerConnection||window.mozRTCPeerConnection||window.webkitRTCPeerConnection,RTCIceCandidate=window.RTCIceCandidate||window.mozRTCIceCandidate;
