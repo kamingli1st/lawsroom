@@ -116,28 +116,24 @@
                         return this.$.input;
                     }
                 }
-            }, 
+            },
             ready: function(){
                 this.me = makeID();
                 this.showData("[NOTICE]: "+this.lang('notice_your_name')+" " + getName(this.me));
                 this.room = new Room({
                     signalServer: "wss://"+location.hostname+"/signal/r/",
                     me: this.me,
-                    iceServers: [{
-                        urls: ["stun:stun.lawsroom.com:3478"]
-                    }, {
-                        urls: "turn:stun.lawsroom.com:3478",
-                        username: "yiquganchangduan",
-                        credential: "tianyahechumizhiyin"
-                    }, {
-                        urls: "turn:stun.lawsroom.com:3478?transport=tcp",
-                        username: "yiquganchangduan",
-                        credential: "tianyahechumizhiyin"
-                    }, {
-                        urls: "turn:stun.lawsroom.com:3478?transport=udp",
-                        username: "yiquganchangduan",
-                        credential: "tianyahechumizhiyin"
-                    }]
+                    iceServers: [
+                        {
+                            urls: [
+                                'stun:stun.l.google.com:19302',
+                                'stun:stun1.l.google.com:19302',
+                                'stun:stun2.l.google.com:19302',
+                                'stun:stun3.l.google.com:19302',
+                                'stun:stun4.l.google.com:19302',
+                            ],
+                        },
+                    ],
                 });
                 this.room.on("signal_open", this.signal_open.bind(this));
                 this.room.on("signal_close", this.signal_close.bind(this));
