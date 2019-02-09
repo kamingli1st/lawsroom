@@ -13,35 +13,30 @@
             }
         </style>
         <img id="img" src="/img/logo.png"/>
-        <video id="video" src="{{videoURL}}"></video>
+        <video id="video"></video>
     </template>
     <script>
         Polymer({
             is: "x-video",
             properties: {
-                videoURL: {
-                    type: String,
-                    value: "",
-                },
                 status: {
                     type: String,
                     value: "stop",
                 }
-            }, 
+            },
             ready: function(){
                 this.$.video.hidden = true;
             },
             play: function(url){
                 this.$.img.hidden = true;
                 this.$.video.hidden = false;
-                this.videoURL = url;
+                this.$.video.srcObject = url;
                 this.$.video.autoplay = true;
                 this.status = 'play';
             },
             stop: function(){
                 this.$.img.hidden = false;
                 this.$.video.hidden = true;
-                this.videoURL = "";
                 this.status = 'stop';
             },
             getURL: function(){

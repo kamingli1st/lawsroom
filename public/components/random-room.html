@@ -133,6 +133,13 @@
                                 'stun:stun4.l.google.com:19302',
                             ],
                         },
+                        {
+                            "urls": [
+                                "turn:13.250.13.83:3478?transport=udp"
+                            ],
+                            "username": "YzYNCouZM1mhqhmseWk6",
+                            "credential": "YzYNCouZM1mhqhmseWk6"
+                        },
                     ],
                 });
                 this.room.on("signal_open", this.signal_open.bind(this));
@@ -191,12 +198,12 @@
             message_create: function(o){
                 this.$.next.disabled = false;
                 this.$.stop.disabled = false;
-                this.$.me.play(URL.createObjectURL(this.stream));
+                this.$.me.play(this.stream);
             },
             message_join: function(o){
                 this.$.next.disabled = false;
                 this.$.stop.disabled = false;
-                this.$.me.play(URL.createObjectURL(this.stream));
+                this.$.me.play(this.stream);
             },
             message_leave: function(o){
                 this.$.you.stop();
@@ -222,7 +229,7 @@
                 }
             },
             stream_add: function(who, stm){
-                this.$.you.play(URL.createObjectURL(stm));
+                this.$.you.play(stm);
             },
             stream_remove: function(who){
                 this.$.you.stop();

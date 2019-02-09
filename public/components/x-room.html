@@ -115,6 +115,13 @@
                                 'stun:stun4.l.google.com:19302',
                             ],
                         },
+                        {
+                            "urls": [
+                                "turn:13.250.13.83:3478?transport=udp"
+                            ],
+                            "username": "YzYNCouZM1mhqhmseWk6",
+                            "credential": "YzYNCouZM1mhqhmseWk6"
+                        },
                     ],
                 });
                 this.room.on("signal_open", this.signal_open.bind(this));
@@ -198,7 +205,7 @@
             addVideo: function(who, stm){
                 for(var id in this.videos){
                     if(this.videos[id] === ''){
-                        this.$[id].play(URL.createObjectURL(stm));
+                        this.$[id].play(stm);
                         this.videos[id] = who;
                         break;
                     }
